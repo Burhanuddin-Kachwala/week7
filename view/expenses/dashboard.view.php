@@ -34,6 +34,9 @@
     </style>
 
 </head>
+<?php views('expenses/modal/editExpense.modal.php', ['category' => $category]); ?>
+<?php views('expenses/modal/addExpense.modal.php', ['category' => $category]); ?>
+<?php views('expenses/modal/addCategory.modal.php'); ?>
 
 <body class="font-sans bg-gray-100">
 
@@ -145,8 +148,14 @@
                                         <?= htmlspecialchars($expense['description']); ?> - <?= $expense['amount']; ?> RS
                                     </span>
                                     <div class="flex space-x-2">
-                                        <a href="edit.php?id=<?= $expense['id']; ?>" class="bg-blue-600 text-white px-2 py-1 rounded">Edit</a>
-                                        <form method="post" action="/destroy" class="inline">
+                                        
+                                        <button id= "editBtn"class="bg-blue-600 text-white px-2 py-1 rounded" data-modal-toggle="edit-expense-modal" data-modal-target="edit-expense-modal" data-expense-id="<?= $expense['id']; ?>" data-modal-target="edit-expense-modal"
+                                            data-id="<?= $expense['id']; ?>"
+                                            data-amount="<?= $expense['amount']; ?>"
+                                            data-category="<?= $expense['category']; ?>"
+                                            data-description="<?= $expense['description']; ?>"
+                                            data-date="<?= $expense['date']; ?>">Edit</button>
+                                        <form method="post" action="/destroy" class="inline" onsubmit="return confirm('Are you sure you want to delete this expense?');">
                                             <input type="hidden" name="_method" value="delete">
                                             <input type="hidden" name="id" value="<?= $expense['id']; ?>">
                                             <button type="submit" class="bg-red-600 text-white px-2 py-1 rounded">Delete</button>
@@ -210,90 +219,9 @@
 
     </div>
 
-    <!-- Add Expense Modal -->
-    <div class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-full" id="add-expense-modal" tabindex="-1" aria-hidden="true">
 
-        <div class="relative w-full max-w-md max-h-full mx-auto mt-20">
-            <div class="bg-gray-800 shadow-lg rounded-lg p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-2xl font-bold text-white">Add Expense</h2>
-                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-600 hover:text-white rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="add-expense-modal">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                </div>
-                <form class="space-y-4" method="post" action="/add-expense">
-                    <div>
-                        <label for="amount" class="block text-gray-300 font-semibold">Amount (RS)</label>
-                        <input type="number" id="amount" name="amount" placeholder="Enter amount" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400 bg-gray-700 text-white" min="0">
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <div class="flex-1">
-                            <label for="category" class="block text-gray-300 font-semibold">Category</label>
-                            <select id="category" name="category" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400 bg-gray-700 text-white" <?= empty($category) ? 'disabled' : '' ?>>
-                                <?php if (!empty($category)): ?>
-                                    <?php foreach ($category as $cat): ?>
-                                        <option value="<?= $cat['id']; ?>"><?= $cat['name']; ?></option>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </select>
-                        </div>
-                        <div>
-                            <button id="toggleCategoryInput" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300" data-modal-target="add-category-modal" data-modal-toggle="add-category-modal">New Category</button>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="description" class="block text-gray-300 font-semibold">Description</label>
-                        <input type="text" id="description" name="description" placeholder="Enter description" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400 bg-gray-700 text-white">
-                    </div>
-                    <div>
-                        <label for="date" class="block text-gray-300 font-semibold">Date</label>
-                        <input type="date" id="date" name="date" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400 bg-gray-700 text-white">
-                        <p id="dateError" class="text-red-500 text-sm mt-1 hidden">Date cannot be in the future.</p>
-                    </div>
-                    <button id="btnSubmit" type="submit" class="w-full bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
-                        Add Expense
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
 
-    <!-- Add Category Modal -->
-    <!-- Main Modal Section Start -->
-    <div id="add-category-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
 
-        <div class="relative p-4 w-full max-w-md max-h-full">
-            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Add New Category
-                    </h3>
-                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="add-category-modal">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                </div>
-                <!-- Form For category Addition -->
-                <form id="categoryForm" class="p-4 md:p-5" method="post" action="/add-category">
-                    <div class="mb-4">
-                        <label for="categoryName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category Name</label>
-                        <input type="text" name="categoryName" id="categoryName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter category name" required>
-                    </div>
-                    <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
-                        </svg>
-                        Add Category
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.0/flowbite.min.js"></script>
