@@ -1,0 +1,27 @@
+{
+    "name": "burhanuddinkachwala/week6",
+    "authors": [
+        {
+            "name": "Burhanuddin-Kachwala",
+            "email": "burhanuddin.ast@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/collections": "^9.52"
+    },
+    "autoload": {
+        "psr-4": {
+            "core\\": "core/",
+            "http\\": "http/"
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^1.23",
+        "phpunit/phpunit": "^9.6"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
