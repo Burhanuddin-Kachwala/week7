@@ -15,11 +15,12 @@ $category=$db->query('select * from expense_groups')->find();
 views(
     'expenses/dashboard.view.php', 
     [
-        'heading' => 'Notes',
+        
         'results' => $results,
         'months' => groupExpensesByMonth($results),
         'categories'=>groupExpensesByCategory($results),
-        'category'=>$category
+        'category'=>$category,
+        'display'=>'category',
         
     ]
 );

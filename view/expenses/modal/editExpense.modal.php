@@ -10,10 +10,10 @@
                 <span class="sr-only">Close modal</span>
             </button>
         </div>
-        <form class="space-y-4" method="post" action="/edit-expense">
+        <form class="expenseForm space-y-4" method="post" action="/edit-expense">
             <input type="hidden" name="id" id="id">
             <input type="hidden" name="_method" value="PATCH">
-           
+
             <div>
                 <label for="amount" class="block text-gray-300 font-semibold">Amount (RS)</label>
                 <input type="number" id="amount" name="amount" placeholder="Enter amount" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-400 bg-gray-700 text-white" min="0">
@@ -45,35 +45,4 @@
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    // Attach a click event handler to the anchor element
-   
-    jQuery(document).on('click', '#editBtn', function(event) {
-        event.preventDefault();
-                // Get data attributes
-        var expenseId = $(this).data('expense-id');
-        var id = $(this).data('id');
-        var amount = $(this).data('amount');
-        var category = $(this).data('category');
-        var description = $(this).data('description');
-        var date = $(this).data('date');
 
-        // Populate the form fields with the data
-        $('#id').val(id);
-        $('#amount').val(amount);
-        $('#category').val(category)
-        $('#description').val(description);
-        $('#date').val(date);
-        console.log('Edit expense modal opened with data:', { expenseId, id, amount, category, description, date });
-       
-        $('#category option').each(function() {
-            if ($(this).text().trim() === category) {
-                $('#category').val($(this).val());
-            }
-        });
-        
-    });
-});
-</script>
