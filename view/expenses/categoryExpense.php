@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 expense-container">
                 <?php $grandTotalByCategory = 0; ?>
                 <?php foreach ($categories as $category => $data): ?>
                     <div class="bg-gray-800 p-4 rounded-lg shadow-md">
@@ -16,7 +16,7 @@
                                             data-category="<?= $expense['category']; ?>"
                                             data-description="<?= $expense['description']; ?>"
                                             data-date="<?= $expense['date']; ?>">Edit</button>
-                                        <form method="post" action="/destroy" class="inline">
+                                        <form method="post" action="/destroy" class="inline"  onsubmit="return confirm('Are you sure you want to delete this expense?');">
                                             <input type="hidden" name="_method" value="delete">
                                             <input type="hidden" name="id" value="<?= $expense['id']; ?>">
                                             <button type="submit" class="bg-red-600 text-white px-2 py-1 rounded">Delete</button>
@@ -38,3 +38,5 @@
                 <h3 class="text-xl font-semibold text-white">Grand Total</h3>
                 <p class="text-lg font-bold text-yellow-500"><?= $grandTotalByCategory; ?> RS</p>
             </div>
+             <!-- Toast Message -->
+             <?php views('toast.view.php')?>

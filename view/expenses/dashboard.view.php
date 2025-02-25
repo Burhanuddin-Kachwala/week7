@@ -1,39 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard || Expense Tracker</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
+<?php require base_path('partials/head.php'); ?>
+<style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
 
-        ::-webkit-scrollbar-thumb {
-            background-color: #4B5563;
-            /* Gray-600 */
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
+    ::-webkit-scrollbar-thumb {
+        background-color: #4B5563;
+        /* Gray-600 */
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background-color: #9CA3AF;
-            /* Gray-400 */
-        }
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #9CA3AF;
+        /* Gray-400 */
+    }
 
-        ::-webkit-scrollbar-track {
-            background-color: #1F2937;
-            /* Gray-800 */
-            border-radius: 4px;
-        }
-    </style>
-
-</head>
+    ::-webkit-scrollbar-track {
+        background-color: #1F2937;
+        /* Gray-800 */
+        border-radius: 4px;
+    }
+</style>
 
 <?php views('expenses/modal/editExpense.modal.php', ['category' => $category]); ?>
 <?php views('expenses/modal/addExpense.modal.php', ['category' => $category]); ?>
@@ -64,13 +57,13 @@
                                 <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
                             </svg> Category
                         </a>
-                        
-                            
-                       
+
+
+
                     </li>
                     <li class="mt-4"><a id="toggleView" class="block py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center">
-                                    View by Category
-    </a></li>
+                            <?= $display === 'category' ? 'View by Month' : 'View by Category'; ?>
+                        </a></li>
                 </ul>
             </nav>
 
@@ -149,7 +142,7 @@
 
             <!-- Conditional Display of Expenses -->
             <?php if ($display === 'category'): ?>
-                
+
                 <?php views('expenses/categoryExpense.php', ['categories' => groupExpensesByCategory($results)]); ?>
             <?php else: ?>
                 <?php views('expenses/monthlyExpense.php', ['months' => groupExpensesByMonth($results)]); ?>
@@ -159,15 +152,20 @@
         </div>
         <!-- END Main Content -->
 
+
+
+             
+
     </div>
 
 
+   
 
-
+   
 
 </body>
 <script>
-    document.getElementById('toggleView').addEventListener('click', function() {
+    $('#toggleView').on('click', function() {
         var url = new URL(window.location.href);
         var currentView = url.searchParams.get('view');
         var newView = currentView === 'category' ? 'month' : 'category';
@@ -177,9 +175,10 @@
         window.location.href = url.toString();
 
         // Change button text accordingly
-        this.textContent = newView === 'category' ? 'View by Month' : 'View by Category';
+        $(this).text(newView === 'category' ? 'View by Month' : 'View by Category');
     });
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.0/flowbite.min.js"></script>
@@ -187,6 +186,8 @@
 <?php views('scripts/addCategory.php'); ?>
 <?php views('scripts/addExpense.php'); ?>
 <?php views('scripts/editExpense.php'); ?>
+<?php views('scripts/deleteExpense.php'); ?>
+<?php views('scripts/toastMessage.php') ?>
 
 
 

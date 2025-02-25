@@ -6,7 +6,7 @@ session_start();
 const BASE_PATH = __DIR__.'/../';
 require BASE_PATH.'vendor/autoload.php';
 require(BASE_PATH.'core/functions.php');
-require base_path('partials/head.php');
+
 require base_path('core/Database.php');
 // spl_autoload_register(function($class){
 //    $class=str_replace('\\',DIRECTORY_SEPARATOR,$class); 

@@ -56,7 +56,13 @@
                 <button id="btnSubmit" type="submit" class="w-full bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
                     Add Expense
                 </button>
+
+                <!-- Toast Message -->
+            <?php views('toast.view.php')?>
             </form>
+            
+
+
         </div>
     </div>
 </div>

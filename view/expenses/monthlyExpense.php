@@ -39,3 +39,7 @@
                 <h3 class="text-xl font-semibold text-white">Grand Total</h3>
                 <p class="text-lg font-bold text-yellow-500"><?= $grandTotalByMonth; ?> RS</p>
             </div>
+
+             <!-- Toast Message -->
+             <?php views('toast.view.php')?>
+

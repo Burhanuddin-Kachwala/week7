@@ -3,14 +3,21 @@
 use core\App;
 use core\Database;
 
-//require base_path('../Database.php');
+header('Content-Type: application/json');
 
 $db = App::resolve(Database::class);
 
 
+    $id = $_POST['id'] ?? null;
 
-$db->query('delete from expenses where id = :id', [
-    'id' => $_POST['id']
-]);
-header('Location: /dashboard');
-
+    if ($id) {
+        $db->query('DELETE FROM expenses WHERE id = :id', [
+            'id' => $id
+        ]);
+        echo json_encode(['status' => 'success', 'message' => 'Expense deleted successfully']);
+        exit();
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Invalid ID']);
+        exit();
+    }
+   

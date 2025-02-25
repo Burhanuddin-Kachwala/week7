@@ -2,6 +2,7 @@
 use core\App;
 use core\Database;
 
+
 $db = App::resolve(Database::class);
 
 $results =$db->query("SELECT e.*, c.name AS category 

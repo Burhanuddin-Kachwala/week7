@@ -25,6 +25,9 @@ $db->query(
     
 ]);
 
-// Redirect the user
-header('location: /dashboard');
-die();
+// Return success response
+echo json_encode([
+    'status' => 'success',
+    'message' => 'Expense Edited successfully!'
+]);
+exit();
