@@ -9,20 +9,23 @@
                                     <span class="text-white break-words max-w-[70%]">
                                         <?= htmlspecialchars($expense['description']); ?> - <?= $expense['amount']; ?> RS
                                     </span>
-                                    <div class="flex space-x-2">
-                                        
-                                        <button id= "editBtn"class="bg-blue-600 text-white px-2 py-1 rounded" data-modal-toggle="edit-expense-modal" data-modal-target="edit-expense-modal" data-expense-id="<?= $expense['id']; ?>" data-modal-target="edit-expense-modal"
-                                            data-id="<?= $expense['id']; ?>"
-                                            data-amount="<?= $expense['amount']; ?>"
-                                            data-category="<?= $expense['category']; ?>"
-                                            data-description="<?= $expense['description']; ?>"
-                                            data-date="<?= $expense['date']; ?>">Edit</button>
-                                        <form method="post" action="/destroy" class="inline" onsubmit="return confirm('Are you sure you want to delete this expense?');">
-                                            <input type="hidden" name="_method" value="delete">
-                                            <input type="hidden" name="id" value="<?= $expense['id']; ?>">
-                                            <button type="submit" class="bg-red-600 text-white px-2 py-1 rounded">Delete</button>
-                                        </form>
-                                    </div>
+                                    <div class="flex space-x-4"> <!-- Adjusted spacing -->
+                            <button id="editBtn" class="text-yellow-400" data-modal-toggle="edit-expense-modal" data-modal-target="edit-expense-modal" data-expense-id="<?= $expense['id']; ?>" data-modal-target="edit-expense-modal"
+                                data-id="<?= $expense['id']; ?>"
+                                data-amount="<?= $expense['amount']; ?>"
+                                data-category="<?= $expense['category']; ?>"
+                                data-description="<?= $expense['description']; ?>"
+                                data-date="<?= $expense['date']; ?>">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                            <form method="post" action="/destroy" class="inline" onsubmit="return confirm('Are you sure you want to delete this expense?');">
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="hidden" name="id" value="<?= $expense['id']; ?>">
+                                <button type="submit" class="text-red-400">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -46,4 +49,7 @@
 
              <!-- Toast Message -->
              <?php views('toast.view.php')?>
+
+              <!--manual toaste -->
+<div id="dashboard-toast" class="fixed bottom-4 right-4  text-white text-sm rounded-lg shadow-lg p-4 flex items-center justify-between space-x-4 hidden"></div>
 

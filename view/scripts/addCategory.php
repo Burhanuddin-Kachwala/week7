@@ -39,7 +39,8 @@
 
                         // Check if the response indicates success
                         if (response.status === 'success') {
-                            showToast(response.message, 'success');
+                            //showToast(response.message, 'success');
+                            $('#category-toast').html(response.message || "An error occurred").addClass("bg-green-500").fadeIn().delay(3000).fadeOut();
                             // Clear the form input
 
                             $('#categoryName').val('');
@@ -48,12 +49,14 @@
                             }, 500);
                         } else {
 
-                            showToast(response.message || "An error occurred", "failure");
+                            $('#category-toast').html(response.message || "An error occurred").addClass("bg-red-500").fadeIn().delay(3000).fadeOut();
+
                         }
                     },
                     error: function(xhr, status, error) {
                         console.error("AJAX Error: ", error);
-                        showToast("Something went wrong. Please try again.", "bg-red-500");
+                        //showToast("Something went wrong. Please try again.", "bg-red-500");
+                        $('#category-toast').html(response.message || "An error occurred").addClass("bg-red-500").fadeIn().delay(3000).fadeOut();
                     }
                 });
 

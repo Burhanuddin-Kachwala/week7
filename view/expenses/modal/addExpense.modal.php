@@ -59,6 +59,8 @@
 
                 <!-- Toast Message -->
             <?php views('toast.view.php')?>
+             <!--manual toaste -->
+<div id="expense-toast" class="fixed bottom-4 right-4  text-white text-sm rounded-lg shadow-lg p-4 flex items-center justify-between space-x-4 hidden"></div>
             </form>
             
 

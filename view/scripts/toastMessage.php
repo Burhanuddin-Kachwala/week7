@@ -1,6 +1,6 @@
 <script>
-const SUCCESS_CLASS = 'bg-green-500';
-const FAILURE_CLASS = 'bg-red-500';
+var SUCCESS_CLASS = 'bg-green-500';
+var FAILURE_CLASS = 'bg-red-500';
 
 function showToast(message, status) {
     console.log('Showing toast message:', message, status);

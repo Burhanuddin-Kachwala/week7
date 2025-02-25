@@ -5,7 +5,10 @@ $router->post("/add-expense","expenses/store.php");
 $router->post("/add-category","expenses/category/store.php");
 $router->delete("/destroy","expenses/destroy.php"); 
 $router->patch("/edit-expense","expenses/update.php");
+$router->patch("/edit-category","expenses/category/update.php");
 $router->get('/fetchExpenses', 'expenses/fetchExpense.php');
+$router->delete("/destroyCategory","expenses/category/destroy.php"); 
+
 
 
 // $router->get("/contact","contact.php");

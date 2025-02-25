@@ -59,7 +59,8 @@
                         if (response.status === 'success') {
                             // Show success toast message
 
-                            showToast(response.message, 'success');
+                            //showToast(response.message, 'success');
+                            $('#expense-toast').html(response.message || "An error occurred").addClass("bg-green-500").fadeIn().delay(3000).fadeOut();
                             var formData = $(form).serializeArray();
 
 var amount = formData.find(item => item.name === 'amount')?.value;
@@ -110,6 +111,7 @@ var date = formData.find(item => item.name === 'date')?.value;
 
                         } else if (response.status === 'error') {
                             // Show error toast message
+                            $('#expense-toast').html(response.message || "An error occurred").addClass("bg-red-500").fadeIn().delay(3000).fadeOut();
                             showToast('An error occured', 'error');
                         }
                     },

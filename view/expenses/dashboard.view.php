@@ -31,6 +31,7 @@
 <?php views('expenses/modal/editExpense.modal.php', ['category' => $category]); ?>
 <?php views('expenses/modal/addExpense.modal.php', ['category' => $category]); ?>
 <?php views('expenses/modal/addCategory.modal.php'); ?>
+<?php views('expenses/modal/editCategory.modal.php'); ?>
 
 <body class="font-sans bg-gray-100">
     <?php
@@ -188,6 +189,9 @@
 <?php views('scripts/editExpense.php'); ?>
 <?php views('scripts/deleteExpense.php'); ?>
 <?php views('scripts/toastMessage.php') ?>
+<?php views('scripts/editCategory.php') ?>
+
+
 
 
 
