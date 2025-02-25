@@ -33,6 +33,10 @@
                     </div>
                     <?php $grandTotalByMonth += $data['total']; ?>
                 <?php endforeach; ?>
+                <span class="new-data"></span>
+
+
+    
             </div>
             
             <div class="bg-gray-800 p-4 rounded-lg shadow-md mt-4">

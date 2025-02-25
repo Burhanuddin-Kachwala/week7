@@ -58,7 +58,29 @@
                     success: function(response) {
                         if (response.status === 'success') {
                             // Show success toast message
+
                             showToast(response.message, 'success');
+                            var formData = $(form).serializeArray();
+
+var amount = formData.find(item => item.name === 'amount')?.value;
+
+var description = formData.find(item => item.name === 'description')?.value;
+var category = formData.find(item => item.text === 'category')?.value;
+var date = formData.find(item => item.name === 'date')?.value;
+                            var newHtml = `
+    <div class="bg-gray-800 p-4 rounded-lg shadow-md mb-4">
+        <h3 class="text-xl font-semibold text-yellow-300">Expense</h3>
+        <p class="text-white">Description: ${description}</p>
+        <p class="text-white">Amount: ${amount} RS</p>
+        
+        <p class="text-white">Date: ${date}</p>
+    </div>
+`;
+                          
+                            $('.new-data').append(newHtml);
+
+
+
 
                             // Optionally, reset the form
                             $('#expenseForm')[0].reset();
@@ -75,11 +97,10 @@
                                 type: 'GET',
                                 success: function(response) {
                                     console.log(response);
-                                    // // Update the expenses container with the new data
-                                     $('.expense-container').html(response);
+                                    
 
                                     // Show toast message for success
-                                   // showToast(response.errors.join(', '), 'error');
+                                    // showToast(response.errors.join(', '), 'error');
                                 },
                                 error: function(error) {
                                     // alert('Failed to load expenses.' + error);
