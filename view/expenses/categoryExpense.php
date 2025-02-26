@@ -3,28 +3,28 @@
     <?php $grandTotalByCategory = 0; ?>
     <?php foreach ($categories as $category => $data): ?>
         <div class="bg-gray-800 p-4 rounded-lg shadow-md">
-            <div class="flex justify-between items-center">
-                <h3 class="text-xl font-semibold text-white"><?= htmlspecialchars($category); ?></h3>
-                <div class="flex space-x-4"> 
-                    <button id="editCategoryBtn" 
-                        class="text-yellow-400 text-2xl" 
-                            data-modal-target="edit-category-modal" 
-                            data-modal-toggle="edit-category-modal"
-                            data-old="<?= htmlspecialchars($category); ?>"
-                        > 
-                        <i class="fas fa-pen"></i>
-                    </button>
-                   
-                    <form method="post" action="/destroyCategory" id="deleteCategory" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
-                                <input type="hidden" name="_method" value="delete">
-                                <input type="hidden" name="name" value="<?= htmlspecialchars($category); ?>">
-                                <button type="submit" class="text-red-400 text-2xl">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                    
-                </div>
-            </div>
+        <div class="flex justify-between items-center group">
+    <h3 class="text-xl font-semibold text-white"><?= htmlspecialchars($category); ?></h3>
+    <div class="flex space-x-4"> 
+        <button id="editCategoryBtn" 
+            class="text-yellow-400 text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+            data-modal-target="edit-category-modal" 
+            data-modal-toggle="edit-category-modal"
+            data-old="<?= htmlspecialchars($category); ?>"
+        > 
+            <i class="fas fa-pen"></i>
+        </button>
+
+        <form method="post" action="/destroyCategory" id="deleteCategory" class="inline" onsubmit="return confirm('Are you sure you want to delete this category?');">
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="name" value="<?= htmlspecialchars($category); ?>">
+            <button type="submit" class="text-red-400 text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <i class="fas fa-trash"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
             <ul class="space-y-2 mt-2 max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600">
                 <?php foreach ($data['expenses'] as $expense): ?>
                     <li class="flex justify-between items-start p-2 bg-gray-700 rounded-lg ">
